@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityDemo.Web", "SecurityDemo.Web\SecurityDemo.Web.csproj", "{494FDC84-B674-4F92-ACFC-72872994BC66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A1835BA-FFC7-400B-83BB-C7818FA84BCE}"
+	ProjectSection(SolutionItems) = preProject
+		README = README
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
