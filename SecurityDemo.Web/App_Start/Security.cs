@@ -28,10 +28,10 @@ namespace SecurityDemo.Web.App_Start
 
         public void Init(HttpApplication context)
         {
-            context.AuthorizeRequest += new EventHandler(context_AuthenticateRequest);
+            context.AuthorizeRequest += new EventHandler(context_AuthorizeRequest);
         }
 
-        void context_AuthenticateRequest(object sender, EventArgs e)
+        void context_AuthorizeRequest(object sender, EventArgs e)
         {
             var app = sender as HttpApplication;
             if (app == null)
