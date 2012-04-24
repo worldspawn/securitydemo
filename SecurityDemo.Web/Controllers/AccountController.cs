@@ -22,11 +22,6 @@ namespace SecurityDemo.Web.Controllers
             return View();
         }
 
-        /// <summary>
-        /// These would go well as an enum, you could put them in a database but as permissions (not roles) should be completely static that doesn't make a lot of sense.
-        /// The reason for an enum is you could store the underlying Int32 in the cookie rather than the string name of the permission which takes up too much room.
-        /// The cookie without the CanBeAwesome permissions is 425 bytes, with it its' 489. Quite a lot of growth. You've only got 4096 (        /// The cookie without the CanBeAwesome permissions is 425 bytes, with it its' 489. You've only got 4096 (http://myownplayground.atspace.com/cookietest.html) to work with.
-        /// </summary>
         readonly int[] mockPermissions;
 
         [HttpPost]
