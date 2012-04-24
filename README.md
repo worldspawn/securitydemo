@@ -1,0 +1,1 @@
+Demo's one approach for custom management of a asp.net forms authentication ticket
