@@ -4,7 +4,7 @@
 
 <h1>Index</h1>
 <p>Congratulations you can access this.</p>
-@if (User.IsInRole("CanBeAwesome"))
+@if (User.HasPermission(SecurityDemo.Web.App_Start.ApplicationPermission.CanBeAwesome))
 {
   <p>Apparently you are awesome so you can also access @Html.ActionLink("this", "outofyourleague")</p>
 }
@@ -13,10 +13,12 @@ else
   <p>But you cannot access - @Html.ActionLink("this", "awesomepage")</p>
   <p>
   If you try the default behaviour is to redirect you to the forms authentication logon url... which is bit stupid. 
-  If you are already logged on it should just return a 403.
+  If you are already logged on it should just return a 403. So SensibleAuthorizeAttribute takes care of that.
   </p>
 }
-
 <p>
-<button @(User.IsInRole("CanPushTheButton") ? string.Empty : @"disabled=""disabled""")>The Button</button>
+<button @(User.HasPermission(SecurityDemo.Web.App_Start.ApplicationPermission.CanBeAwesome) ? string.Empty : @"disabled=""disabled""")>The Button</button>
+</p>
+<p>
+  Above button will be disabled without the CanPushTheButton permission.
 </p>

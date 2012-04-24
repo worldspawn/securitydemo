@@ -9,13 +9,13 @@ namespace SecurityDemo.Web.Controllers
 {
     public class DemoController : Controller
     {
-        [SensibleAuthorizeAttribute(Roles = "CanViewDemoIndex")]
+        [SensibleAuthorizeAttribute(Permissions = new[] { ApplicationPermission.CanViewDemoIndex})]
         public ActionResult Index()
         {
             return View();
         }
 
-        [SensibleAuthorizeAttribute(Roles = "CanBeAwesome")]
+        [SensibleAuthorizeAttribute(Permissions = new [] {ApplicationPermission.CanBeAwesome})]
         public ActionResult AwesomePage()
         {
             return View();

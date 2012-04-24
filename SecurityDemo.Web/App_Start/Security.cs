@@ -49,10 +49,11 @@ namespace SecurityDemo.Web.App_Start
                 return;
 
             var ticket = FormsAuthentication.Decrypt(authCookie.Value);
-            var permissions = Newtonsoft.Json.JsonConvert.DeserializeObject<string[]>(ticket.UserData);
+            var permissionsRaw = Newtonsoft.Json.JsonConvert.DeserializeObject<int[]>(ticket.UserData);
+            var permissions = permissionsRaw.Select(p => ((ApplicationPermission)p).ToString());
 
             var identity = new GenericIdentity(ticket.Name);
-            var principal = new GenericPrincipal(identity, permissions);
+            var principal = new GenericPrincipal(identity, permissions.ToArray());
 
             app.Context.User = principal;
         }
@@ -70,6 +71,18 @@ namespace SecurityDemo.Web.App_Start
 
             base.HandleUnauthorizedRequest(filterContext);
         }
+
+        public ApplicationPermission[] Permissions
+        {
+            set
+            {
+                Roles = string.Join(",", value.Select(p => p.ToString()).ToArray());
+            }
+            get
+            {
+                return Roles.Split(',').Select(p => (ApplicationPermission)Enum.Parse(typeof(ApplicationPermission), p)).ToArray();
+            }
+        }
     }
 
     public class Http403Result : ActionResult
@@ -78,5 +91,12 @@ namespace SecurityDemo.Web.App_Start
         {
             context.HttpContext.Response.StatusCode = 403;
         }
+    }
+
+    public enum ApplicationPermission
+    {
+        CanViewDemoIndex,
+        CanPushTheButton,
+        CanBeAwesome
     }
 }
