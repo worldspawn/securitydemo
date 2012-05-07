@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SecurityDemo.Web.App_Start;
+﻿using System.Web.Mvc;
+using ApplicationSecurity.Mvc;
+using SecurityDemo.Data;
+using SecurityDemo.Web.Security;
 
 namespace SecurityDemo.Web.Controllers
 {
     public class DemoController : Controller
     {
-        [SensibleAuthorizeAttribute(Permissions = new[] { ApplicationPermission.CanViewDemoIndex})]
+        [PermissionAuthorize(Permissions = new[] { Permission.ManageCar })]
         public ActionResult Index()
         {
             return View();
         }
 
-        [SensibleAuthorizeAttribute(Permissions = new [] {ApplicationPermission.CanBeAwesome})]
+        [PermissionAuthorize(Permissions = new[] { Permission.ManageCar })]
         public ActionResult AwesomePage()
         {
             return View();

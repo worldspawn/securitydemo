@@ -1,10 +1,11 @@
-﻿@{
+﻿@using SecurityDemo.Web.Security
+@{
     ViewBag.Title = "Index";
 }
 
 <h1>Index</h1>
 <p>Congratulations you can access this page.</p>
-@if (User.HasPermission(SecurityDemo.Web.App_Start.ApplicationPermission.CanBeAwesome))
+@if (User.HasPermission(SecurityDemo.Data.Permission.ManageCar))
 {
   <p>Apparently you are awesome so you can also access @Html.ActionLink("this", "AwesomePage")</p>
 }
@@ -17,7 +18,7 @@ else
   </p>
 }
 <p>
-<button @(User.HasPermission(SecurityDemo.Web.App_Start.ApplicationPermission.CanBeAwesome) ? string.Empty : @"disabled=""disabled""")>The Button</button>
+<button @(User.HasPermission(SecurityDemo.Data.Permission.ManageCar) ? string.Empty : @"disabled=""disabled""")>The Button</button>
 </p>
 <p>
   Above button will be disabled without the CanPushTheButton permission.

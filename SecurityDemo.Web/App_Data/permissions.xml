@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<security>
+  <group type="SelogerCity.Data.User" name="Car Operations">
+    <set ref="Car Manager - Read Only" />
+    <set ref="Car Manager" />
+  </group>
+  <permissionsets>
+    <set name="Car Manager - Read Only">
+      <permission ref="ManageCar" />
+    </set>
+    <set name="Car Manager">
+      <permission ref="ManageCar" />
+      <permission ref="CreateCar" />
+      <permission ref="EditCar" />
+    </set>
+  </permissionsets>
+  <permissions>
+    <permission name="ManageCar" id="00" />
+    <permission name="CreateCar" id="01" />
+    <permission name="EditCar" id="02" />
+  </permissions>
+</security>

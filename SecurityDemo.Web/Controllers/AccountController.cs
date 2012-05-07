@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Newtonsoft.Json;
-using SecurityDemo.Web.App_Start;
+using SecurityDemo.Data;
 
 namespace SecurityDemo.Web.Controllers
 {
@@ -13,7 +12,7 @@ namespace SecurityDemo.Web.Controllers
     {
         public AccountController()
         {
-            mockPermissions = (int[])Enum.GetValues(typeof(ApplicationPermission));
+            mockPermissions = (int[])Enum.GetValues(typeof(Permission));
         }
 
         [HttpGet]
@@ -29,8 +28,6 @@ namespace SecurityDemo.Web.Controllers
         {
             //do some db lookup to confirm credentials
             var mockPermissions = this.mockPermissions.ToList();
-            if (!isAwesome)
-                mockPermissions.Remove((int)ApplicationPermission.CanBeAwesome);
 
             var ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddDays(1), true,
                 JsonConvert.SerializeObject(mockPermissions));
