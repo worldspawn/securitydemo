@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using ApplicationSecurity;
 using Newtonsoft.Json;
 using SecurityDemo.Data;
 
@@ -13,6 +14,7 @@ namespace SecurityDemo.Web.Controllers
         public AccountController()
         {
             mockPermissions = (int[])Enum.GetValues(typeof(Permission));
+            _config = new PermissionConfig<Permission>(Server.MapPath("~/add_data/permissions.xml"));
         }
 
         [HttpGet]
@@ -22,9 +24,10 @@ namespace SecurityDemo.Web.Controllers
         }
 
         readonly int[] mockPermissions;
+        private PermissionConfig<Permission> _config;
 
         [HttpPost]
-        public ActionResult Logon(string username, string password, string redirectUrl, bool isAwesome = false)
+        public ActionResult Logon(string username, string password, string redirectUrl)
         {
             //do some db lookup to confirm credentials
             var mockPermissions = this.mockPermissions.ToList();

@@ -7,8 +7,8 @@ namespace SecurityDemo.Web.Security
     {
         public Permission[] Permissions
         {
-            get { throw new System.NotImplementedException(); }
-            set { throw new System.NotImplementedException(); }
+            get { return GetPermissions<Permission>(); }
+            set { SetPermissions(value); }
         }
     }
 }

@@ -13,8 +13,8 @@ namespace SecurityDemo.Web.Controllers
             return View();
         }
 
-        [PermissionAuthorize(Permissions = new[] { Permission.ManageCar })]
-        public ActionResult AwesomePage()
+        [PermissionAuthorize(Permissions = new[] { Permission.EditCar })]
+        public ActionResult EditCar()
         {
             return View();
         }

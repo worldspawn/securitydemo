@@ -5,21 +5,21 @@
 
 <h1>Index</h1>
 <p>Congratulations you can access this page.</p>
-@if (User.HasPermission(SecurityDemo.Data.Permission.ManageCar))
+@if (User.HasPermission(SecurityDemo.Data.Permission.EditCar))
 {
-  <p>Apparently you are awesome so you can also access @Html.ActionLink("this", "AwesomePage")</p>
+  <p>Apparently you are an editor so you can also access @Html.ActionLink("this", "EditCar")</p>
 }
 else
 {
-  <p>But you cannot access - @Html.ActionLink("this", "awesomepage")</p>
+  <p>But you cannot access - @Html.ActionLink("this", "EditCar")</p>
   <p>
   If you try the default behaviour is to redirect you to the forms authentication logon url... which is bit stupid. 
   If you are already logged on it should just return a 403. So SensibleAuthorizeAttribute takes care of that.
   </p>
 }
 <p>
-<button @(User.HasPermission(SecurityDemo.Data.Permission.ManageCar) ? string.Empty : @"disabled=""disabled""")>The Button</button>
+<button @(User.HasPermission(SecurityDemo.Data.Permission.CreateCar) ? string.Empty : @"disabled=""disabled""")>Create Car</button>
 </p>
 <p>
-  Above button will be disabled without the CanPushTheButton permission.
+  Above button will be disabled without the CreateCar permission.
 </p>
