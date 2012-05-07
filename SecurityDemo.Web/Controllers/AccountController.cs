@@ -29,8 +29,6 @@ namespace SecurityDemo.Web.Controllers
         [HttpPost]
         public ActionResult Logon(string username, string password, string redirectUrl)
         {
-            _config = new PermissionConfig<Permission>(Server.MapPath("~/app_data/permissions.xml"));
-
             //do some db lookup to confirm credentials
 
             var ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddDays(1), true,
