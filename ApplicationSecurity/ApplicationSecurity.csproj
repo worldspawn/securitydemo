@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Group.cs" />
+    <Compile Include="ModuleLoader.cs" />
     <Compile Include="Mvc\Http403Result.cs" />
     <Compile Include="Mvc\SensibleAuthorizeAttribute.cs" />
     <Compile Include="SecurityModule.cs" />

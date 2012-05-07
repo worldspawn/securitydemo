@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <security>
-  <group type="SelogerCity.Data.User" name="Car Operations">
+  <group type="SecurityDemo.Data.User, SecurityDemo.Data" name="Car Operations">
     <set ref="Car Manager - Read Only" />
     <set ref="Car Manager" />
   </group>

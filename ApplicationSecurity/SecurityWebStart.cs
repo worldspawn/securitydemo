@@ -10,7 +10,7 @@ namespace ApplicationSecurity
     {
         public static void PreStart()
         {
-            DynamicModuleUtility.RegisterModule(typeof(SecurityModule<T>));
+            DynamicModuleUtility.RegisterModule(typeof(ModuleLoader<SecurityModule<T>>));
         }
     }
 }

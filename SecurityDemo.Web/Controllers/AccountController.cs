@@ -11,10 +11,11 @@ namespace SecurityDemo.Web.Controllers
 {
     public class AccountController : Controller
     {
-        public AccountController()
+        private readonly PermissionConfig<Permission> _permissionConfig;
+
+        public AccountController(PermissionConfig<Permission> permissionConfig)
         {
-            mockPermissions = (int[])Enum.GetValues(typeof(Permission));
-            _config = new PermissionConfig<Permission>(Server.MapPath("~/add_data/permissions.xml"));
+            _permissionConfig = permissionConfig;
         }
 
         [HttpGet]
@@ -23,17 +24,17 @@ namespace SecurityDemo.Web.Controllers
             return View();
         }
 
-        readonly int[] mockPermissions;
         private PermissionConfig<Permission> _config;
 
         [HttpPost]
         public ActionResult Logon(string username, string password, string redirectUrl)
         {
+            _config = new PermissionConfig<Permission>(Server.MapPath("~/app_data/permissions.xml"));
+
             //do some db lookup to confirm credentials
-            var mockPermissions = this.mockPermissions.ToList();
 
             var ticket = new FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddDays(1), true,
-                JsonConvert.SerializeObject(mockPermissions));
+                JsonConvert.SerializeObject(_permissionConfig.Permissions.Select(x => x.Key)));
 
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName);
             authCookie.Value = FormsAuthentication.Encrypt(ticket);

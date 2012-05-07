@@ -22,14 +22,14 @@ namespace ApplicationSecurity
                 var name = p.GetAttribute("name", "");
                 var id = p.GetAttribute("id", "");
 
-                _permissions.Add(id, (T)Enum.Parse(typeof(T), name));
+                Permissions.Add(id, (T)Enum.Parse(typeof(T), name));
             }
 
             foreach(XPathNavigator ps in nav.Select("//permissionsets/set"))
             {
                 var name = ps.GetAttribute("name", "");
                 var permissions = new List<T>();
-                _sets.Add(name, permissions);
+                Sets.Add(name, permissions);
                 foreach(XPathNavigator p in ps.Select("permission"))
                 {
                     var permission = p.GetAttribute("ref", "");
@@ -47,7 +47,7 @@ namespace ApplicationSecurity
                     throw new InvalidDataException(string.Format("type unknown {0}", typeName));
 
                 var g = new Group { Name = name };
-                _groups.Add(type, g);
+                Groups.Add(type, g);
 
                 foreach(XPathNavigator set in group.Select("set"))
                 {
@@ -59,5 +59,20 @@ namespace ApplicationSecurity
         private readonly IDictionary<string, T> _permissions = new Dictionary<string, T>();
         private readonly IDictionary<string, List<T>> _sets = new Dictionary<string, List<T>>();
         private readonly IDictionary<Type, Group> _groups = new Dictionary<Type, Group>();
+
+        public IDictionary<string, T> Permissions
+        {
+            get { return _permissions; }
+        }
+
+        public IDictionary<string, List<T>> Sets
+        {
+            get { return _sets; }
+        }
+
+        public IDictionary<Type, Group> Groups
+        {
+            get { return _groups; }
+        }
     }
 }

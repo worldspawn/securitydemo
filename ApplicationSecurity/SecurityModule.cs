@@ -8,10 +8,15 @@ namespace ApplicationSecurity
 {
     public class SecurityModule<T> : IHttpModule
     {
-        public void Dispose()
+        private readonly PermissionConfig<T> _config;
+
+        public SecurityModule(PermissionConfig<T> config)
         {
-            
+            _config = config;
         }
+
+        public void Dispose()
+        {}
 
         public void Init(HttpApplication context)
         {
@@ -36,8 +41,9 @@ namespace ApplicationSecurity
                 return;
 
             var ticket = FormsAuthentication.Decrypt(authCookie.Value);
-            var permissionsRaw = Newtonsoft.Json.JsonConvert.DeserializeObject<int[]>(ticket.UserData);
-            var permissions = permissionsRaw.Select(p => (Convert.ChangeType(p, typeof(T))).ToString());
+            var permissionsRaw = Newtonsoft.Json.JsonConvert.DeserializeObject<string[]>(ticket.UserData);
+            
+            var permissions = permissionsRaw.Select(p => _config.Permissions[p].ToString());
             
             var identity = new GenericIdentity(ticket.Name);
             var principal = new GenericPrincipal(identity, permissions.ToArray());

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplicationSecurity\ApplicationSecurity.csproj">
